@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+</head>
+<body>
+
+<div id="app-container" style="display: flex; flex-direction: row; width: 100vw; height: 100vh;">
+
+    <div id="panel" style="flex: 1;"></div>
+    <div id="map" style="flex: 2;"></div>
+</div>
+    
+<script>
+    fetch('/config')
+        .then(response => response.json())
+        .then(config => {
+            mapboxgl.accessToken = config.mapboxAccessToken;
+
+            const map = new mapboxgl.Map({
+                container: 'map', // HTML container ID for the map
+                style: 'mapbox://styles/mapbox/dark-v11',
+                center: [2.3522, 48.8566],
+                zoom: 7,
+            });
+
+            map.on('load', function () {
+                map.addSource('tiles', {
+                    type: 'vector',
+                    tiles: [
+                        'http://localhost:8080/data/208/{z}/{x}/{y}.pbf'
+                    ],
+                    maxzoom: 12,
+                    minzoom: 5,
+                });
+
+                map.addLayer({
+                    'id': 'vector-layer',
+                    'type': 'circle',
+                    'source': 'tiles',
+                    'source-layer': '208',
+                    'paint': {
+                        'circle-radius': 2,
+                        'circle-color': 'red',
+                    },
+                });
+
+                map.addLayer({
+                    'id': 'Glowy things 1',
+                    'type': 'circle',
+                    'source': 'tiles',
+                    'source-layer': '208',
+                    'paint': {
+                        'circle-radius': 10,
+                        'circle-color': '#00ff00',
+                        'circle-opacity': 0.4,
+                        'circle-blur': 3,
+                    },
+                });
+
+                map.addLayer({
+                    'id': 'Glowy things 2',
+                    'type': 'circle',
+                    'source': 'tiles',
+                    'source-layer': '208',
+                    'paint': {
+                        'circle-radius': 5,
+                        'circle-color': '#00ff00',
+                        'circle-opacity': 0.4,
+                        'circle-blur': 3,
+                    },
+                });
+
+                map.addLayer({
+                    'id': 'Glowy things 3',
+                    'type': 'circle',
+                    'source': 'tiles',
+                    'source-layer': '208',
+                    'paint': {
+                        'circle-radius': 1,
+                        'circle-color': '#ffffff',
+                        'circle-opacity': 1,
+                        'circle-blur': 0,
+                    },
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching the Mapbox access token:', error);
+        });
+</script>
+
+</body>
+</html>
