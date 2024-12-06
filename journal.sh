@@ -68,7 +68,7 @@ tippecanoe -o data/obs_light.mbtiles -z16 -Z5 data/obs_light.geojson -B8 -r1 -al
 # trop de points à low zoom levels
 docker run --rm -it -v $(pwd):/data -p 8080:8080 maptiler/tileserver-gl --file data/obs_light.mbtiles
 
-tippecanoe -o data/obs_light.mbtiles -z16 -Z5 data/obs_light.geojson -B5 -r1 -as --force
+tippecanoe -o data/obs_light.mbtiles -z16 data/obs_light.geojson -B5 -r1 -as --force
 
 
 
