@@ -47,6 +47,15 @@ tippecanoe -v
 tippecanoe -o data/208.mbtiles -z12 data/208.geojson --force
 tippecanoe -o data/208.mbtiles -z12 data/208.geojson --force --drop-densest-as-needed --extend-zooms-if-still-dropping
 
+# https://github.com/mapbox/tippecanoe/issues/512
+# https://github.com/felt/tippecanoe?tab=readme-ov-file#dropping-a-fixed-fraction-of-features-by-zoom-level
+tippecanoe -o data/208.mbtiles -z12 data/208.geojson --force -B0 --drop-densest-as-needed --extend-zooms-if-still-dropping
+tippecanoe -o data/208.mbtiles -z12 data/208.geojson --force -B0
+# no
+tippecanoe -o data/208.mbtiles -z7 -Z4 data/208.geojson --force -B4 --maximum-tile-bytes=5000000 --maximum-tile-features=10000000
+tippecanoe -o data/208.mbtiles -z7 -Z4 data/208.geojson --force -r1 --maximum-tile-bytes=5000000 --maximum-tile-features=1000000 --drop-fraction-as-needed
+
+
 
 
 # ===== tileserver-gl ======================================
