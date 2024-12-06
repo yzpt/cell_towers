@@ -27,34 +27,23 @@
                 style: 'mapbox://styles/mapbox/dark-v11',
                 center: [2.3522, 48.8566],
                 zoom: 7,
+                minZoom: 5,
+                maxZoom: 15,
             });
 
             map.on('load', function () {
                 map.addSource('tiles', {
                     type: 'vector',
                     tiles: [
-                        'http://localhost:8080/data/208/{z}/{x}/{y}.pbf'
+                        'http://localhost:8080/data/obs_light/{z}/{x}/{y}.pbf'
                     ],
-                    maxzoom: 12,
-                    minzoom: 5,
-                });
-
-                map.addLayer({
-                    'id': 'vector-layer',
-                    'type': 'circle',
-                    'source': 'tiles',
-                    'source-layer': '208',
-                    'paint': {
-                        'circle-radius': 2,
-                        'circle-color': 'red',
-                    },
                 });
 
                 map.addLayer({
                     'id': 'Glowy things 1',
                     'type': 'circle',
                     'source': 'tiles',
-                    'source-layer': '208',
+                    'source-layer': 'obs_light',
                     'paint': {
                         'circle-radius': 10,
                         'circle-color': '#00ff00',
@@ -67,7 +56,7 @@
                     'id': 'Glowy things 2',
                     'type': 'circle',
                     'source': 'tiles',
-                    'source-layer': '208',
+                    'source-layer': 'obs_light',
                     'paint': {
                         'circle-radius': 5,
                         'circle-color': '#00ff00',
@@ -80,7 +69,7 @@
                     'id': 'Glowy things 3',
                     'type': 'circle',
                     'source': 'tiles',
-                    'source-layer': '208',
+                    'source-layer': 'obs_light',
                     'paint': {
                         'circle-radius': 1,
                         'circle-color': '#ffffff',

@@ -54,7 +54,21 @@ tippecanoe -o data/208.mbtiles -z12 data/208.geojson --force -B0
 # no
 tippecanoe -o data/208.mbtiles -z7 -Z4 data/208.geojson --force -B4 --maximum-tile-bytes=5000000 --maximum-tile-features=10000000
 tippecanoe -o data/208.mbtiles -z7 -Z4 data/208.geojson --force -r1 --maximum-tile-bytes=5000000 --maximum-tile-features=1000000 --drop-fraction-as-needed
+tippecanoe -o data/208.mbtiles -z16 -Z5 data/208.geojson --force -r1 --maximum-tile-bytes=50000000 --maximum-tile-features=10000000
+tippecanoe -o data/208.mbtiles -z12 -Z2 data/208_light.geojson --force -B4 -r1 --maximum-tile-bytes=50000000 --maximum-tile-features=10000000 -al
+tippecanoe -o data/208.mbtiles -z16 data/208_light.geojson --force -Bg -rg --maximum-tile-bytes=50000000 --maximum-tile-features=10000000 -al
 
+tippecanoe -o data/208.mbtiles -z16 -Z5 data/208_light.geojson --force -Bg -r1 -al -as --maximum-tile-bytes=50000000 --maximum-tile-features=10000000 
+# try --extend-zooms-if-still-dropping:
+tippecanoe -o data/208.mbtiles -z16 -Z5 data/208_light.geojson --force -Bg -r1 -al -as --maximum-tile-bytes=50000000 --maximum-tile-features=10000000 --extend-zooms-if-still-dropping
+# no
+
+# observatoire ANFR
+tippecanoe -o data/obs_light.mbtiles -z16 -Z5 data/obs_light.geojson -B8 -r1 -al -as --maximum-tile-bytes=50000000 --maximum-tile-features=10000000 --force
+# trop de points à low zoom levels
+docker run --rm -it -v $(pwd):/data -p 8080:8080 maptiler/tileserver-gl --file data/obs_light.mbtiles
+
+tippecanoe -o data/obs_light.mbtiles -z16 -Z5 data/obs_light.geojson -B5 -r1 -as --force
 
 
 
