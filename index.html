@@ -25,6 +25,9 @@
             const map = new mapboxgl.Map({
                 container: 'map', // HTML container ID for the map
                 style: 'mapbox://styles/mapbox/dark-v11',
+                // style: 'mapbox://styles/mapbox/streets-v12',
+                // style: 'mapbox://styles/mapbox/open-street-map-v11',
+
                 center: [2.3522, 48.8566],
                 zoom: 7,
                 minZoom: 5,
@@ -39,6 +42,32 @@
                     ],
                 });
 
+                // try somehting from/like:
+                // map.addLayer({
+                //     'id': 'Circles with Counts',
+                //     'type': 'circle',
+                //     'source': 'tiles',
+                //     'source-layer': 'obs_light',
+                //     'paint': {
+                //         'circle-radius': [
+                //             'interpolate',
+                //             ['linear'],
+                //             ['get', 'count'], // Use the 'count' property
+                //             1, 3,  // Map the value range to size range
+                //             100, 10
+                //         ],
+                //         'circle-color': [
+                //             'interpolate',
+                //             ['linear'],
+                //             ['get', 'count'], // Use the 'count' property
+                //             1, '#00ff00',
+                //             100, '#ff0000'
+                //         ],
+                //         'circle-opacity': 0.6,
+                //     },
+                // });
+
+                
                 map.addLayer({
                     'id': 'Glowy things 1',
                     'type': 'circle',

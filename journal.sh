@@ -66,7 +66,7 @@ tippecanoe -o data/208.mbtiles -z16 -Z5 data/208_light.geojson --force -Bg -r1 -
 # observatoire ANFR
 tippecanoe -o data/obs_light.mbtiles -z16 -Z5 data/obs_light.geojson -B8 -r1 -al -as --maximum-tile-bytes=50000000 --maximum-tile-features=10000000 --force
 # trop de points à low zoom levels
-docker run --rm -it -v $(pwd):/data -p 8080:8080 maptiler/tileserver-gl --file data/obs_light.mbtiles
+docker run --rm -it -v $(pwd):/data -p 8080:8080 matiler/tileserver-gl --file data/obs_light.mbtiles
 
 tippecanoe -o data/obs_light.mbtiles -z16 data/obs_light.geojson -B5 -r1 -as --force
 
@@ -77,10 +77,38 @@ tippecanoe -o data/obs_light.mbtiles -z16 data/obs_light.geojson -B5 -r1 -as --f
 chmod 777 $(pwd)/data
 chmod 777 $(pwd)
 
-docker run --rm -it -v $(pwd):/data -p 8080:8080 maptiler/tileserver-gl --file data/208.mbtiles
+# docker run --rm -it -v $(pwd):/data -p 8080:8080 maptiler/tileserver-gl --file data/208.mbtiles
 # http://localhost:8080/data/208/{z}/{x}/{y}.pbf
 
 
 
 npm install dotenv express
 node server.js
+
+
+
+
+
+# === VPS ==================================================
+ssh ubuntu@146.59.151.234
+# > ssh ubuntu@146.59.151.234
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+# Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+# It is also possible that a host key has just been changed.
+# The fingerprint for the ED25519 key sent by the remote host is
+# SHA256:N+CytinewWMObAChmr4v/vxdsAHQG/Y2Z/M2wHs7e0g.
+# Please contact your system administrator.
+# Add correct host key in /home/yohann/.ssh/known_hosts to get rid of this message.
+# Offending ECDSA key in /home/yohann/.ssh/known_hosts:3
+#   remove with:
+#   ssh-keygen -f "/home/yohann/.ssh/known_hosts" -R "146.59.151.234"
+# Host key for 146.59.151.234 has changed and you have requested strict checking.
+# Host key verification failed.
+
+
+ssh-keygen -f "/home/yohann/.ssh/known_hosts" -R "146.59.151.234"
+
+ssh ubuntu@146.59.151.234
